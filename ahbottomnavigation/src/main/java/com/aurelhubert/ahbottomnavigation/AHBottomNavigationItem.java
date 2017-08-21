@@ -127,11 +127,7 @@ public class AHBottomNavigationItem {
 	
 	public Drawable getDrawable(Context context) {
     if (drawableRes != 0) {
-      try {
-        return VectorDrawableCompat.create(context.getResources(), drawableRes, null);
-      }catch (Resources.NotFoundException e){
-        return ContextCompat.getDrawable(context, drawableRes);
-      }
+		return ContextCompat.getDrawable(context, drawableRes);
     }
     return drawable;
   }
