@@ -40,7 +40,7 @@ public class AHHelper {
 			return drawable;
 		}
 		Drawable wrapDrawable = DrawableCompat.wrap(drawable).mutate();
-		DrawableCompat.setTint(wrapDrawable, color);
+        // DrawableCompat.setTint(wrapDrawable, color);
 		return wrapDrawable;
 	}
 
