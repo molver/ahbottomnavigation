@@ -50,4 +50,14 @@
         android:textSize="@dimen/bottom_navigation_notification_text_size"
         android:textStyle="bold"/>
 
+    <ImageView
+        android:id="@+id/iv_red_dot"
+        android:layout_width="11dp"
+        android:layout_height="11dp"
+        android:visibility="gone"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/bottom_navigation_notification_margin_left"
+        android:layout_marginTop="@dimen/bottom_navigation_notification_margin_top_classic"
+        android:src="#ff0000"
+        android:contentDescription="@null" />
 </FrameLayout>

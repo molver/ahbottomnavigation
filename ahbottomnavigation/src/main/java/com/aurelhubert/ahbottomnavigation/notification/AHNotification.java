@@ -3,6 +3,7 @@ package com.aurelhubert.ahbottomnavigation.notification;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.ColorInt;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
@@ -23,14 +24,13 @@ public class AHNotification implements Parcelable {
     @ColorInt
     private int backgroundColor; // if 0 then use default value
 
+    private boolean showDot;
+
+    @DrawableRes
+    private int dotDrawable;
+
     public AHNotification() {
         // empty
-    }
-
-    private AHNotification(Parcel in) {
-        text = in.readString();
-        textColor = in.readInt();
-        backgroundColor = in.readInt();
     }
 
     public boolean isEmpty() {
@@ -61,25 +61,34 @@ public class AHNotification implements Parcelable {
         return notificationList;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public boolean isShowDot() {
+        return showDot;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(text);
-        dest.writeInt(textColor);
-        dest.writeInt(backgroundColor);
+    public void setShowDot(boolean showDot) {
+        this.showDot = showDot;
     }
 
-    public static class Builder {
+    public int getDotDrawable() {
+        return dotDrawable;
+    }
+
+    public void setDotDrawable(int dotDrawable) {
+        this.dotDrawable = dotDrawable;
+    }
+
+    public static class Builder implements Parcelable {
         @Nullable
         private String text;
         @ColorInt
         private int textColor;
         @ColorInt
         private int backgroundColor;
+
+        private boolean showDot;
+
+        @DrawableRes
+        private int dotDrawable;
 
         public Builder setText(String text) {
             this.text = text;
@@ -96,19 +105,92 @@ public class AHNotification implements Parcelable {
             return this;
         }
 
+        public Builder setShowDot(boolean isShowDot) {
+            this.showDot = isShowDot;
+            return this;
+        }
+
         public AHNotification build() {
             AHNotification notification = new AHNotification();
             notification.text = text;
             notification.textColor = textColor;
             notification.backgroundColor = backgroundColor;
+            notification.showDot = showDot;
+            notification.dotDrawable = dotDrawable;
             return notification;
         }
+
+        public int getDotDrawable() {
+            return dotDrawable;
+        }
+
+        public Builder setDotDrawable(int dotDrawable) {
+            this.dotDrawable = dotDrawable;
+            return this;
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.text);
+            dest.writeInt(this.textColor);
+            dest.writeInt(this.backgroundColor);
+            dest.writeByte(this.showDot ? (byte) 1 : (byte) 0);
+            dest.writeInt(this.dotDrawable);
+        }
+
+        public Builder() {
+        }
+
+        protected Builder(Parcel in) {
+            this.text = in.readString();
+            this.textColor = in.readInt();
+            this.backgroundColor = in.readInt();
+            this.showDot = in.readByte() != 0;
+            this.dotDrawable = in.readInt();
+        }
+
+        public static final Creator<Builder> CREATOR = new Creator<Builder>() {
+            @Override
+            public Builder createFromParcel(Parcel source) {
+                return new Builder(source);
+            }
+
+            @Override
+            public Builder[] newArray(int size) {
+                return new Builder[size];
+            }
+        };
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.text);
+        dest.writeInt(this.textColor);
+        dest.writeInt(this.backgroundColor);
+        dest.writeByte(this.showDot ? (byte) 1 : (byte) 0);
+    }
+
+    protected AHNotification(Parcel in) {
+        this.text = in.readString();
+        this.textColor = in.readInt();
+        this.backgroundColor = in.readInt();
+        this.showDot = in.readByte() != 0;
     }
 
     public static final Creator<AHNotification> CREATOR = new Creator<AHNotification>() {
         @Override
-        public AHNotification createFromParcel(Parcel in) {
-            return new AHNotification(in);
+        public AHNotification createFromParcel(Parcel source) {
+            return new AHNotification(source);
         }
 
         @Override
@@ -116,5 +198,4 @@ public class AHNotification implements Parcelable {
             return new AHNotification[size];
         }
     };
-
 }

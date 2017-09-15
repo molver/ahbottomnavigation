@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_navigation_container"
     android:layout_width="match_parent"
@@ -17,7 +16,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="@dimen/bottom_navigation_margin_bottom"
         android:layout_marginTop="@dimen/bottom_navigation_margin_top_inactive"
-        android:gravity="center"/>
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/bottom_navigation_item_title"
@@ -30,7 +29,7 @@
         android:lines="1"
         android:textColor="@color/colorBottomNavigationInactive"
         android:textSize="@dimen/bottom_navigation_text_size_inactive"
-        tools:text="Label One"/>
+        tools:text="Label One" />
 
     <TextView
         android:id="@+id/bottom_navigation_notification"
@@ -48,6 +47,18 @@
         android:paddingRight="@dimen/bottom_navigation_notification_padding"
         android:textColor="#FFFFFF"
         android:textSize="@dimen/bottom_navigation_notification_text_size"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
+
+
+    <ImageView
+        android:id="@+id/iv_red_dot"
+        android:layout_width="11dp"
+        android:layout_height="11dp"
+        android:visibility="gone"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/bottom_navigation_notification_margin_left"
+        android:layout_marginTop="@dimen/bottom_navigation_notification_margin_top_classic"
+        android:src="#ff0000"
+        android:contentDescription="@null" />
 
 </FrameLayout>
